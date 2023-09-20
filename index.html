@@ -7,19 +7,17 @@
         <link href="app.css" rel="stylesheet" type="text/css">
         <script defer src="main.js"></script>
     </head>
-    <body class="flex">
+    <body class="flex flex-row">
         <div class="bg-gray-200 w-3/12 h-screen border-r-gray-300 border-2 flex items-center flex-col">
             <input type="text" placeholder="Create New List..." class="w-4/5 h-16 text-lg outline-none pl-5 my-10"></input>
-            <div class="w-full h-fit">
-                <button class="list w-full bg-gray-300 h-14 text-2xl flex justify-center items-center">Shopping</button>
-                <button class="list w-full bg-gray-300 h-14 text-2xl flex justify-center items-center">Schasdfle</button>
-                <button class="list w-full bg-gray-300 h-14 text-2xl flex justify-center items-center">Schsule</button>
-                <button class="list w-full bg-gray-300 h-14 text-2xl flex justify-center items-center">Schewqe</button>
-                <button class="list w-full bg-gray-300 h-14 text-2xl flex justify-center items-center">Schthhle</button>
+            <div id="mainLists" class="w-full h-fit">
             </div>
         </div>
         <div>
-            <div id="title" class="w-fit h-fit text-7xl border-b-2 border-black ml-16 mt-10">asdfasdf</div>
+            <div id="current-list-name" class="w-fit h-fit text-7xl border-b-2 border-black ml-16 mt-10">asdfasdf</div>
+            <div id="current-list-todos">
+                
+            </div>
         </div>
     </body>
 </html>

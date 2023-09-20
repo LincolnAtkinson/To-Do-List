@@ -1,3 +1,71 @@
+let title = document.getElementById('title');
+function newClick(a) {
+    title.textContent = a.textContent;
+};
+
+const lists = [
+    {
+        name: 'Shopping list',
+        todos: [
+            {
+                text: 'bananas',
+                completed: false
+            },
+            {
+                text: 'a wee bit of honey',
+                completed: false
+            }
+        ]
+    },
+    {
+        name: 'Schedule',
+        todos: [
+            {
+                text: 'sleep',
+                completed: false
+            },
+            {
+                text: 'homework',
+                completed: false
+            }
+        ]
+    }
+];
+
+const currentListId = 0;
+const currentList = {};
+
+function showCurrentList(list, index) {
+    currentitem = list[index];
+    currentList.name = currentitem.name;
+    currentList.todos = currentitem.todos;
+    return currentList;
+};
+
+showCurrentList(lists, currentListId);
+
+function render() {
+    let listsHtml = '<ul class="list-group">';
+    lists.forEach((list) => {
+        listsHtml += `<li class="list-group-item"><button class="list w-full bg-gray-300 h-14 text-2xl flex justify-center items-center">${list.name}</button></li>`;
+    });
+    listsHtml += '</ul>';
+    console.log(listsHtml);
+    // Replace 'lists' with the ID of the element where you want to render the lists
+    document.getElementById('mainLists').innerHTML = listsHtml;
+    document.getElementById('current-list-name').innerText = currentList.name;
+
+    let todosHtml = '<ul class="list-group-flush">';
+    currentList.todos.forEach((todo) => {
+        todosHtml += `<li class="list-group-item"><input type="checkbox">${todo.text}</li>`;
+    });
+    // Replace 'current-list-todos' with the ID of the element where you want to render todos
+    document.getElementById('current-list-todos').innerHTML = todosHtml;
+}
+
+// Call the render function to display lists and todos
+render();
+
 let b = document.querySelectorAll('button.list');
 b.forEach(function(b) {
     b.addEventListener('click', function() {
@@ -6,58 +74,8 @@ b.forEach(function(b) {
             i.classList.toggle('selected');
             i.classList.toggle('list');
         }
-        else {
-            console.log('selected not found');
-        }
         b.classList.toggle('selected');
         b.classList.toggle('list');
         newClick(b);
     })
 });
-
-let title = document.getElementById('title');
-function newClick(a) {
-    title.textContent = a.textContent;
-};
-
-const lists = [
-    { id: 1, name: 'Shopping list' },
-    { id: 2, name: 'Schedule' }
-];
-
-const currentListId = 1;
-
-const currentList = {
-    name: "Shopping list",
-    todos: [
-        {
-            text: 'milk',
-            completed: false
-        },
-        {
-            text: 'A wee bit of honey',
-            completed: false
-        }
-    ]
-};
-
-function render() {
-    let listsHtml = '<ul class="list-group">';
-    lists.forEach((list) => {
-        listsHtml += `<li class="list-group-item">${list.name}</li>`;
-    });
-    listsHtml += '</ul>';
-    // Replace 'lists' with the ID of the element where you want to render the lists
-    document.getElementById('lists').innerHTML = listsHtml;
-    document.getElementById('current-list-name').innerText = currentList.name;
-
-    let todosHtml = '<ul class="list-group-flush">';
-    currentList.todos.forEach((todo) => {
-        todosHtml += `<li class="list-group-item">${todo.text}</li>`;
-    });
-    // Replace 'current-list-todos' with the ID of the element where you want to render todos
-    document.getElementById('current-list-todos').innerHTML = todosHtml;
-}
-
-// Call the render function to display lists and todos
-render();
