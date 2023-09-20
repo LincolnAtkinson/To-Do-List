@@ -11,5 +11,11 @@ b.forEach(function(b) {
         }
         b.classList.toggle('selected');
         b.classList.toggle('list');
+        newClick(b);
     })
 });
+
+let title = document.getElementById('title');
+function newClick(a) {
+    title.textContent = a.textContent;
+};
