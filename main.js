@@ -1,10 +1,6 @@
-let title = document.getElementById('title');
-function newClick(a) {
-    title.textContent = a.textContent;
-};
-
 const lists = [
     {
+        id: 0,
         name: 'Shopping list',
         todos: [
             {
@@ -18,6 +14,7 @@ const lists = [
         ]
     },
     {
+        id: 1,
         name: 'Schedule',
         todos: [
             {
@@ -47,10 +44,9 @@ showCurrentList(lists, currentListId);
 function render() {
     let listsHtml = '<ul class="list-group">';
     lists.forEach((list) => {
-        listsHtml += `<li class="list-group-item"><button class="list w-full bg-gray-300 h-14 text-2xl flex justify-center items-center">${list.name}</button></li>`;
+        listsHtml += `<li class="list-group-item"><button id="${list.id}" class="list w-full bg-gray-300 h-14 text-2xl flex justify-center items-center">${list.name}</button></li>`;
     });
     listsHtml += '</ul>';
-    console.log(listsHtml);
     // Replace 'lists' with the ID of the element where you want to render the lists
     document.getElementById('mainLists').innerHTML = listsHtml;
     document.getElementById('current-list-name').innerText = currentList.name;
@@ -76,6 +72,5 @@ b.forEach(function(b) {
         }
         b.classList.toggle('selected');
         b.classList.toggle('list');
-        newClick(b);
     })
 });
