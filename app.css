@@ -534,6 +534,14 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.fixed {
+  position: fixed;
+}
+
+.relative {
+  position: relative;
+}
+
 .m-16 {
   margin: 4rem;
 }
@@ -553,6 +561,10 @@ video {
 
 .mt-10 {
   margin-top: 2.5rem;
+}
+
+.ml-16 {
+  margin-left: 4rem;
 }
 
 .flex {
