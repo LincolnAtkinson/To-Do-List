@@ -2,11 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer {
-    .selected {
-        background-color: rgb(156 163 175 / var(--tw-bg-opacity));
-    }
-    .hoover:hover {
-        background-color: rgb(94, 94, 94);
-    }
-};
+.list:hover {
+    background-color: rgb(182, 182, 182);
+}
+.selected {
+    background-color: rgb(116, 116, 116);
+}
