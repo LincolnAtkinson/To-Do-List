@@ -3,5 +3,10 @@
 @tailwind utilities;
 
 @layer {
-    
+    .selected {
+        background-color: rgb(156 163 175 / var(--tw-bg-opacity));
+    }
+    .hoover:hover {
+        background-color: rgb(94, 94, 94);
+    }
 };
