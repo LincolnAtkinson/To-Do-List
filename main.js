@@ -44,23 +44,16 @@ const lists = [
     {
         id: 3,
         name: 'Vacation Dates',
-        todos: [
-            {
-                text: 'June 4',
-                completed: false
-            },
-            {
-                text: 'July 21',
-                completed: false
-            }
-        ]
+        todos: []
     }
 ];
 
+var input = document.getElementById('userInput');
 let currentListId = 0;
 const currentList = {};
-let i;
+var i;
 let b = document.querySelectorAll('button.list');
+let t = document.querySelectorAll('trash');
 
 function showCurrentList(list, index) {
     currentitem = list[index];
@@ -75,7 +68,7 @@ showCurrentList(lists, currentListId);
 function render() {
     let listsHtml = '<ul class="list-group">';
     lists.forEach((list) => {
-        listsHtml += `<li class="list-group-item"><button id="${list.id}" class="list w-full bg-gray-300 h-14 text-2xl flex justify-center items-center">${list.name}</button></li>`;
+        listsHtml += `<li class="list-group-item"><button id="${list.id}" class="list w-full bg-gray-300 h-14 text-2xl flex justify-around items-center px-10">${list.name}<button id="${list.id}" class="trash"><i class="fa-solid fa-trash"></i></button></button></li>`;
     });
     listsHtml += '</ul>';
     document.getElementById('mainLists').innerHTML = listsHtml;
@@ -90,6 +83,7 @@ function render() {
     i.classList.add('selected');
     i.classList.remove('list');
     addButtons();
+    addDelete();
 }
 
 render();
@@ -107,4 +101,39 @@ function addButtons() {
             showCurrentList(lists, currentListId);
         })
     });
+}
+
+input.addEventListener('keyup', function(event) {
+    if (event.key === 'Enter') {
+        if (input.value.trim() !== '') {
+            let newList = {
+                id: lists.length,
+                name: input.value,
+                todos: []
+            }
+            lists.push(newList);
+            input.value = '';
+            render();
+        }
+    }
+})
+
+function addDelete() {
+    t = document.querySelectorAll('button.trash');
+    t.forEach(function(t) {
+        t.addEventListener('click', function() {
+            deleteItem(t.id);
+            render();
+            console.log(lists);
+        })
+    })
+}
+
+function deleteItem(index) {
+    if (index >= 0 && index < lists.length) {
+        lists.splice(index, 1);
+        for (let i = index; i < lists.length; i++) {
+            lists[i].id = i + 1;
+        }
+    }
 }

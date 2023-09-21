@@ -8,3 +8,9 @@
 .selected {
     background-color: rgb(116, 116, 116);
 }
+.trash {
+    display: none;
+}
+.selected .trash {
+    display: inline;
+}
