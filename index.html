@@ -9,14 +9,16 @@
     </head>
     <body class="flex flex-row">
         <div class="bg-gray-200 w-3/12 h-screen border-r-gray-300 border-2 flex items-center flex-col">
-            <input type="text" placeholder="Enter List Name..." class="w-4/5 h-16 text-lg outline-none ml-5 my-10"></input>
+            <input type="text" placeholder="Create New List..." class="w-4/5 h-16 text-lg outline-none pl-5 my-10"></input>
             <div id="mainLists" class="w-full h-fit">
+                <ul class="list-group">
+                    <li class="list-group-item"><button id="0" class="list w-full bg-gray-300 h-14 text-2xl flex justify-center items-center">Shopping List</button></li>
+                </ul>
             </div>
         </div>
         <div>
             <div id="current-list-name" class="w-fit h-fit text-7xl border-b-2 border-black ml-16 mt-10">asdfasdf</div>
-            <div id="current-list-todos">
-            </div>
+            <div id="current-list-todos"></div>
         </div>
     </body>
 </html>
