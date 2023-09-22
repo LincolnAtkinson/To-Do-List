@@ -76,7 +76,7 @@ function render() {
 
     let todosHtml = '<ul class="list-group-flush">';
     currentList.todos.forEach((todo) => {
-        todosHtml += `<li class="list-group-item"><input type="checkbox">${todo.text}</li>`;
+        todosHtml += `<li class="current-list-todos"><input type="checkbox" id="check">${todo.text}</li>`;
     });
     document.getElementById('current-list-todos').innerHTML = todosHtml;
     i = document.getElementById(currentListId);

@@ -534,9 +534,22 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.relative {
+  position: relative;
+}
+
+.left-full {
+  left: 100%;
+}
+
 .my-10 {
   margin-top: 2.5rem;
   margin-bottom: 2.5rem;
+}
+
+.my-3 {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
 }
 
 .ml-16 {
@@ -585,6 +598,10 @@ video {
   width: 100%;
 }
 
+.w-1\/4 {
+  width: 25%;
+}
+
 .flex-row {
   flex-direction: row;
 }
@@ -601,12 +618,13 @@ video {
   justify-content: center;
 }
 
-.justify-between {
-  justify-content: space-between;
+.rounded-lg {
+  border-radius: 0.5rem;
 }
 
-.justify-around {
-  justify-content: space-around;
+.rounded-b-lg {
+  border-bottom-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
 }
 
 .border-2 {
@@ -635,6 +653,11 @@ video {
 .bg-gray-300 {
   --tw-bg-opacity: 1;
   background-color: rgb(209 213 219 / var(--tw-bg-opacity));
+}
+
+.px-10 {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
 }
 
 .pl-5 {
@@ -666,7 +689,52 @@ video {
 }
 
 .selected {
-  background-color: rgb(116, 116, 116);
+  background-color: #6e6b6b;
+}
+
+.list-group-item{
+  font-size: 2.5vw;
+  text-align: center;
+  width: 100%;
+  background-color: rgb(209 213 219);
+  border-bottom: solid black;
+}
+
+#current-list-name{
+  font-size: 5vw;
+}
+
+.current-list-todos{
+  font-size: large;
+  border: solid red;
+  margin: 1%;
+  padding: 5px;
+  width: 50%;
+  font-size: 3vw;
+}
+
+#check{
+  width: 4vw;
+  height: 2vw;
+}
+
+#listBox{
+  width: 20vw;
+  height: 5vh;
+  padding: 25px 0px;
+  font-size: 2vw;
+}
+
+#bottombox{
+  width: 38.5vw;
+  height: 10%;
+  margin: 0% 1.1%;
+}
+
+#enter{
+  font-size: 1vw;
+  padding: 1%;
+  margin: 3%;
 }
 
 .trash {
