@@ -10,11 +10,12 @@
 }
 
 .list-group-item{
-    font-size: 2.5vw;    
+    font-size: 1.5vw;    
     text-align: center; 
-    width: 100%;   
+       
     background-color: rgb(209 213 219); 
     border-bottom: solid black;
+    
 } 
 #current-list-name{
     font-size: 5vw;  
@@ -39,7 +40,7 @@
     font-size: 2vw;
 }
 #bottombox{
-    width: 38.5vw;
+    width: 50%;
     height: 10%; 
     margin: 0% 1.1%;
 }
@@ -50,8 +51,9 @@
 }
 .trash {
     display: none;
+    margin-left: 5%;
   }
   
   .selected .trash {
     display: inline;
-  }
+}
