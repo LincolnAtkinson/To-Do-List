@@ -1,0 +1,160 @@
+.list-group-item{
+    font-size: 2.5vw;    
+    text-align: center; 
+    width: 100%;   
+    background-color: rgb(209 213 219); 
+    border-bottom: solid black;
+} 
+#current-list-name{
+    font-size: 5vw;  
+    
+}  
+.current-list-todos{
+    font-size: large;
+    border: solid red;
+    margin: 1%;
+    padding: 5px;
+    width: 50%;
+    font-size: 3vw;
+}
+#check{
+    width: 4vw;
+    height: 2vw;
+}
+#listBox{
+    width: 20vw;
+    height: 5vh;
+    padding: 25px 0px;
+    font-size: 2vw;
+}
+#bottombox{
+    width: 38.5vw;
+    height: 10%; 
+    margin: 0% 1.1%;
+}
+#enter{
+    font-size: 1vw;
+    padding: 1%;
+    margin: 3%;
+}
+
+
+
+
+
+let title = document.getElementById('title');
+function newClick(a) {
+    title.textContent = a.textContent;
+};
+
+const lists = [
+    {
+        name: 'Shopping list',
+        todos: [
+            {
+                text: 'bananas',
+                completed: false
+            },
+            {
+                text: 'a wee bit of honey',
+                completed: false
+            }
+        ]
+    },
+    {
+        name: 'Schedule',
+        todos: [
+            {
+                text: 'sleep',
+                completed: false
+            },
+            {
+                text: 'homework',
+                completed: false
+            }
+        ]
+    }
+];
+
+const currentListId = 0;
+const currentList = {};
+
+function showCurrentList(list, index) {
+    currentitem = list[index];
+    currentList.name = currentitem.name;
+    currentList.todos = currentitem.todos;
+    return currentList;
+};
+
+showCurrentList(lists, currentListId);
+
+function render() {
+    let listsHtml = '<ul class="list-group">';
+    lists.forEach((list) => {
+        listsHtml += `<li class="list-group-item"><button class="list w-full h-14">${list.name}</button></li>`;
+    });
+    listsHtml += '</ul>';
+    console.log(listsHtml);
+    
+    document.getElementById('mainLists').innerHTML = listsHtml;
+    document.getElementById('current-list-name').innerText = currentList.name;
+
+    let todosHtml = '<ul class="list-group-flush">';
+    currentList.todos.forEach((todo) => {
+        todosHtml += `<li class="current-list-todos"><input type="checkbox" id="check">${todo.text}</li>`;
+    });
+    
+    document.getElementById('current-list-todos').innerHTML = todosHtml;
+}
+
+
+render();
+
+let b = document.querySelectorAll('button.list');
+b.forEach(function(b) {
+    b.addEventListener('click', function() {
+        let i = document.querySelector('.selected');
+        if (i) {
+            i.classList.toggle('selected');
+            i.classList.toggle('list');
+        }
+        b.classList.toggle('selected');
+        b.classList.toggle('list');
+        newClick(b);
+    })
+});
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>To-Do List</title>
+        <link href="app.css" rel="stylesheet" type="text/css">
+        <script defer src="main.js"></script>
+    </head>
+    <body class="flex flex-row">
+        <div class="bg-gray-200 w-3/12 h-screen border-r-gray-300 border-2 flex items-center flex-col">
+            <input type="text" placeholder="Enter List Name..." id="listBox" class="text-lg outline-none mx-5 my-10"></input>
+            <div id="mainLists" class="w-full h-fit">
+            </div>
+        </div>
+        <div class="w-full">
+            <div id="current-list-name" class="w-2/5 border-b-2 border-black ml-16 mt-10"></div>
+            
+            <div id="current-list-todos">
+            </div>
+            <div class="bg-gray-300 rounded-b-lg" id="bottombox">
+                <div class="todo">
+                
+                  <input id="enter" type="text" placeholder="Add a task to do." class="my-3 rounded-lg w-1/4 te">  
+                </div>
+                
+            </div>
+        </div>
+    </body>
+</html>
