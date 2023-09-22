@@ -45,10 +45,11 @@ const lists = [
         id: 3,
         name: 'Vacation Dates',
         todos: []
-    }
+    },
 ];
 
 var input = document.getElementById('userInput');
+var taskInput = document.getElementById('enter');
 let currentListId = 0;
 const currentList = {};
 var sel;
@@ -76,14 +77,12 @@ function render() {
 
     let todosHtml = '<ul class="list-group-flush">';
     currentList.todos.forEach((todo) => {
-        todosHtml += `<li class="current-list-todos"><input type="checkbox" id="check">${todo.text}</li>`;
+        todosHtml += `<li class="current-list-todos"><input type="checkbox" class="check">${todo.text}</li>`;
     });
     document.getElementById('current-list-todos').innerHTML = todosHtml;
-    console.log(sel);
     sel = document.getElementById(currentListId);
     sel.classList.add('selected');
     sel.classList.remove('list');
-    console.log(sel);
     addButtons();
     addDelete();
 }
@@ -120,13 +119,27 @@ input.addEventListener('keyup', function(event) {
     }
 })
 
+taskInput.addEventListener('keyup', function(event) {
+    if (event.key === 'Enter') {
+        if (taskInput.value.trim() !== '') {
+            let curr = lists[currentListId];
+            let newTask = {
+                text: taskInput.value.trim(),
+                completed: false
+            }
+            curr.todos.push(newTask);
+            taskInput.value = '';
+            render();
+        }
+    }
+})
+
 function addDelete() {
     t = document.querySelectorAll('button.trash');
     t.forEach(function(t) {
         t.addEventListener('click', function() {
             deleteItem(t.id);
             render();
-            console.log(lists);
         })
     })
 }
@@ -134,16 +147,12 @@ function addDelete() {
 function deleteItem(index) {
     if (index >= 0 && index < lists.length) {
         lists.splice(index, 1);
-        //console.log(sel);
-        if (currentListId === 0) {
-            sel = document.getElementById('1');
+        if (currentListId >= lists.length) {
+            currentListId = Math.max(0, lists.length - 1);
         }
-        else {
-            sel = document.getElementById(currentListId - 1);
-        }
-        //console.log(sel);
         for (let i = index; i < lists.length; i++) {
-            lists[i].id = i + 1;
+            lists[i].id = i;
         }
+        showCurrentList(lists, currentListId);
     }
 }
