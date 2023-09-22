@@ -68,7 +68,7 @@ showCurrentList(lists, currentListId);
 function render() {
     let listsHtml = '<ul class="list-group">';
     lists.forEach((list) => {
-        listsHtml += `<li class="list-group-item"><button id="${list.id}" class="list w-full bg-gray-300 h-14 text-2xl flex justify-around items-center px-10"><span class="trash"></span>${list.name}<button id="${list.id}" class="trash"><i class="fa-solid fa-trash"></i></button><span class="tresh"></span></button></li>`;
+        listsHtml += `<li class="list-group-item"><button id="${list.id}" class="list w-full bg-gray-300 h-14  flex justify-around items-center px-10"><span class="trash"></span>${list.name}<button id="${list.id}" class="trash"><i class="fa-solid fa-trash fa-xs"></i></button><span class="tresh"></span></button></li>`;
     });
     listsHtml += '</ul>';
     document.getElementById('mainLists').innerHTML = listsHtml;
