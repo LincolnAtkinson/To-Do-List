@@ -11,6 +11,12 @@
 .trash {
     display: none;
 }
+.tresh {
+    display: inline;
+}
 .selected .trash {
     display: inline;
+}
+.selected .tresh {
+    display: none;
 }
