@@ -104,6 +104,15 @@ function addButtons() {
     });
 }
 
+function complete() {
+    tasks = document.querySelectorAll('check');
+    tasks.forEach(function(tasks) {
+        tasks.addEventListener('click', function() {
+
+        })
+    })
+}
+
 input.addEventListener('keyup', function(event) {
     if (event.key === 'Enter') {
         if (input.value.trim() !== '') {

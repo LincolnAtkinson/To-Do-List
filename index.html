@@ -8,8 +8,8 @@
         <script defer src="main.js"></script>
         <script src="https://kit.fontawesome.com/0d1d579ea0.js" crossorigin="anonymous"></script>
     </head>
-    <body class="flex flex-row">
-        <div class="bg-gray-200 w-3/12 h-screen border-r-gray-300 border-2 flex items-center flex-col">
+    <body class="flex flex-row h-screen  max-h-screen">
+        <div class="bg-gray-200 w-3/12 h-screen border-r-gray-300 border-2 flex items-center flex-col overflow-y-auto max-h-screen">
             <input type="text" id="userInput" placeholder="Create New List..." class="w-4/5 h-16 text-lg outline-none pl-5 my-10"></input>
             <div id="mainLists" class="w-full h-fit">
                 <ul class="list-group">
@@ -23,10 +23,8 @@
             </div>
             <div class="bg-gray-300 rounded-b-lg" id="bottombox">
                 <div class="todo">
-                
                   <input id="enter" type="text" placeholder="Add a task to do." class="my-3 rounded-lg w-1/4 te">
                 </div>
-                
             </div>
         </div>
     </body>
