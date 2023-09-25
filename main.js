@@ -1,4 +1,4 @@
-const lists = [
+let lists = [
     {
         id: 0,
         name: 'Shopping List',
@@ -55,6 +55,7 @@ const currentList = {};
 var sel;
 let b = document.querySelectorAll('button.list');
 let t = document.querySelectorAll('trash');
+load();
 
 function showCurrentList(list, index) {
     currentitem = list[index];
@@ -85,6 +86,7 @@ function render() {
     sel.classList.remove('list');
     addButtons();
     addDelete();
+    save();
 }
 
 render();
@@ -164,4 +166,21 @@ function deleteItem(index) {
         }
         showCurrentList(lists, currentListId);
     }
+}
+function save() {
+    localStorage.setItem('currentListId', JSON.stringify(currentListId)); 
+    localStorage.setItem('lists', JSON.stringify(lists));
+   }
+
+function load() {
+    const storedCurrentListId = localStorage.getItem('currentListId');
+    const storedLists = localStorage.getItem('lists');
+
+        if (storedCurrentListId) {
+        currentListId = JSON.parse(storedCurrentListId);
+        }
+
+        if (storedLists) {
+        lists = JSON.parse(storedLists);
+        }
 }
