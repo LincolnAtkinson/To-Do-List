@@ -585,16 +585,17 @@ video {
   width: 25%;
 }
 
-.w-2\/5 {
-  width: 40%;
-}
-
 .w-3\/12 {
   width: 25%;
 }
 
 .w-4\/5 {
   width: 80%;
+}
+
+.w-fit {
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 .w-full {
@@ -706,13 +707,13 @@ video {
   font-size: 3vw;
 }
 
-#check{
+.check{
   width: 4vw;
   height: 2vw;
 }
 
-#listBox{
-  width: 20vw;
+#userInput{
+  width: 17vw;
   height: 5vh;
   padding: 25px 0px;
   font-size: 2vw;
@@ -737,4 +738,23 @@ video {
 
 .selected .trash {
   display: inline;
+}
+
+#editTodo{
+  font-size: 10px;
+  float: right;
+}
+
+.up{
+  width: 10px;
+  height: 10px;
+  display: flex;
+  padding: 15px 30px 15px 5px;
+}
+
+.down{
+  width: 10px;
+  height: 10px;
+  display: flex;
+  padding: 15px 30px 15px 5px;
 }
