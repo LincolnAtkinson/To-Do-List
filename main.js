@@ -156,3 +156,20 @@ function deleteItem(index) {
         showCurrentList(lists, currentListId);
     }
 }
+function save() {
+    localStorage.setItem('currentListId', JSON.stringify(currentListId)); 
+    localStorage.setItem('lists', JSON.stringify(lists));
+   }
+
+function load() {
+    const storedCurrentListId = localStorage.getItem('currentListId');
+    const storedLists = localStorage.getItem('lists');
+
+        if (storedCurrentListId) {
+        currentListId = JSON.parse(storedCurrentListId);
+        }
+
+        if (storedLists) {
+        lists = JSON.parse(storedLists);
+        }
+}
