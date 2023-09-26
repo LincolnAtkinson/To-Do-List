@@ -86,6 +86,7 @@ function render() {
     sel.classList.remove('list');
     addButtons();
     addDelete();
+    DragnDrop();
     save();
 }
 
@@ -163,32 +164,35 @@ function editItem() {
 
 }
 
-const sort = document.getElementById("sort");
-let draggedItem = null;
-const listItems = document.querySelectorAll("li");
+function DragnDrop (){
+    const sort = document.getElementById("sort");
+    let draggedItem = null;
+    const listItems = document.querySelectorAll("li");
 
-listItems.forEach((item)=>{
-   item.addEventListener("dragstart", (event) =>{
-    draggedItem = item;
-    event.dataTransfer.setData("text/plain", item.id);
-   }); 
-});
+    listItems.forEach((item)=>{
+        item.addEventListener("dragstart", (event) =>{
+        draggedItem = item;
+        event.dataTransfer.setData("text/plain", item.id);
+        }); 
+    });
 
-sort.addEventListener("dragover", (event) =>{
-    event.preventDefault();
-    const targetItem = event.target.closest("li")
-    if (targetItem && draggedItem !== targetItem){
-        const y = event.clientY - targetItem.getBoundingClientRect().top;
-        const insertBefore = y < targetItem.clientHeight / 2;
+    sort.addEventListener("dragover", (event) =>{
+        event.preventDefault();
+        const targetItem = event.target.closest("li")
+        if (targetItem && draggedItem !== targetItem){
+            const y = event.clientY - targetItem.getBoundingClientRect().top;
+            const insertBefore = y < targetItem.clientHeight / 2;
 
-        if (insertBefore) {
-            sort.insertBefore(draggedItem, targetItem);
-        } else {
-            sort.insertBefore(draggedItem, targetItem.nextSibling);
+            if (insertBefore) {
+                sort.insertBefore(draggedItem, targetItem);
+            } else {
+                sort.insertBefore(draggedItem, targetItem.nextSibling);
+            }
         }
-    }
-});
+    });
 
+}
+    DragnDrop();
 
 
 function save() {
