@@ -1,51 +1,20 @@
 let lists = [
     {
         id: 0,
-        name: 'Shopping List',
+        name: 'Example',
         todos: [
             {
-                text: 'bananas',
+                id: 100,
+                text: 'test',
                 completed: false
             },
             {
+                id: 110,
                 text: 'a wee bit of honey',
                 completed: false
             }
         ]
-    },
-    {
-        id: 1,
-        name: 'Schedule',
-        todos: [
-            {
-                text: 'sleep',
-                completed: false
-            },
-            {
-                text: 'homework',
-                completed: false
-            }
-        ]
-    },
-    {
-        id: 2,
-        name: 'People',
-        todos: [
-            {
-                text: 'james',
-                completed: false
-            },
-            {
-                text: 'ur mom',
-                completed: false
-            }
-        ]
-    },
-    {
-        id: 3,
-        name: 'Vacation Dates',
-        todos: []
-    },
+    }
 ];
 
 var input = document.getElementById('userInput');
@@ -78,8 +47,10 @@ function render() {
 
     let todosHtml = '<ul class="list-group-flush">';
     currentList.todos.forEach((todo) => {
-        todosHtml += `<li class="current-list-todos"><input type="checkbox" class="check">${todo.text} <button id="editTodo"><i class="fa-solid fa-pen-to-square"></i></button></li>`;
+        todosHtml += `<li class="current-list-todos" id="${todo.id}"><input type="checkbox" class="check">${todo.text} <button id="editTodo"><i class="fa-solid fa-pen-to-square"></i></button></li>`;
+        console.log(todo.id);
     });
+    todosHtml += '</ul>';
     document.getElementById('current-list-todos').innerHTML = todosHtml;
     sel = document.getElementById(currentListId);
     sel.classList.add('selected');
