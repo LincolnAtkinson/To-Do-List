@@ -564,10 +564,6 @@ video {
   display: flex;
 }
 
-.hidden {
-  display: none;
-}
-
 .h-14 {
   height: 3.5rem;
 }
@@ -583,6 +579,10 @@ video {
 
 .h-screen {
   height: 100vh;
+}
+
+.max-h-screen {
+  max-height: 100vh;
 }
 
 .w-1\/4 {
@@ -620,6 +620,10 @@ video {
 
 .justify-center {
   justify-content: center;
+}
+
+.overflow-y-auto {
+  overflow-y: auto;
 }
 
 .rounded-lg {
@@ -744,7 +748,7 @@ video {
   display: inline;
 }
 
-#editTodo{
+.editTodo{
   font-size: 10px;
   float: right;
 }
@@ -761,4 +765,12 @@ video {
   height: 10px;
   display: flex;
   padding: 15px 30px 15px 5px;
+}
+
+.hide {
+  display: none;
+}
+
+.delete {
+  font-size: medium;
 }

@@ -9,7 +9,7 @@ let lists = [
                 completed: false
             },
             {
-                id: 110,
+                id: 101,
                 text: 'a wee bit of honey',
                 completed: false
             }
@@ -47,8 +47,12 @@ function render() {
 
     let todosHtml = '<ul class="list-group-flush">';
     currentList.todos.forEach((todo) => {
-        todosHtml += `<li class="current-list-todos" id="${todo.id}"><input type="checkbox" class="check">${todo.text} <button id="editTodo" onclick="editItem()"><i class="fa-solid fa-pen-to-square"></i></button> <input  class="edit hidden" type = "text"></li>`;
-        console.log(todo.id);
+        todosHtml += `<li class="current-list-todos" id="${todo.id}"><input type="checkbox" class="check"><span>${todo.text}</span><button class="editTodo"><i class="fa-solid fa-pen-to-square"></i></button> <input class="edit hide" type="text"><button class="delete hide">Delete</button></li>`;
+        if (todo.id !== undefined) {
+           console.log(todo.id); 
+        } else {
+            console.log('you suck');
+        }
     });
     todosHtml += '</ul>';
     document.getElementById('current-list-todos').innerHTML = todosHtml;
@@ -57,6 +61,7 @@ function render() {
     sel.classList.remove('list');
     addButtons();
     addDelete();
+    editTodo();
     save();
 }
 
@@ -76,6 +81,70 @@ function addButtons() {
         })
     });
 }
+
+function addEdit() {
+    e = document.querySelectorAll('button.editTodo');
+    e.forEach(function(e) {
+        e.addEventListener('click', function () {
+            var close = e.closest('li').querySelector('input.edit');
+            var del = e.closest('li').querySelector('button.delete');
+            close.classList.toggle('hide');
+            del.classList.toggle('hide');
+        })
+    })
+}
+
+function editTodo() {
+    e = document.querySelectorAll('button.editTodo');
+    e.forEach(function(e) {
+        e.addEventListener('click', function() {
+            var listItem = e.closest('li');
+            var editInput = listItem.querySelector('input.edit');
+            var del = listItem.querySelector('button.delete');
+            var todoText = listItem.querySelector('span');
+            
+            editInput.classList.toggle('hide');
+            del.classList.toggle('hide');
+            
+            editInput.value = todoText.textContent;
+
+            editInput.addEventListener('keyup', function(event) {
+                if (event.key === 'Enter') {
+                    todoText.textContent = editInput.value;
+                    editInput.classList.toggle('hide');
+                    del.classList.toggle('hide');
+                    
+                    var todoId = listItem.id;
+                    console.log(listItem.id);
+                    var currentList = lists[currentListId];
+                    var todoToUpdate = currentList.todos.find(todo => todo.id == todoId);
+                    if (todoToUpdate) {
+                        todoToUpdate.text = editInput.value;
+                        save();
+                    }
+                }
+            });
+
+            del.addEventListener('click', function() {
+                var todoId = listItem.id;
+                var currentList = lists[currentListId];
+                var todoToDeleteIndex = currentList.todos.findIndex(todo => todo.id == todoId);
+                if (todoToDeleteIndex !== -1) {
+
+                    currentList.todos.splice(todoToDeleteIndex, 1);
+                    
+                    for (let i = 0; i < currentList.todos.length; i++) {
+                        currentList.todos[i].id = 100 + i;
+                    }
+
+                    save();
+                    render();
+                }
+            });
+        })
+    })
+}
+
 
 function complete() {
     tasks = document.querySelectorAll('check');
@@ -106,6 +175,7 @@ taskInput.addEventListener('keyup', function(event) {
         if (taskInput.value.trim() !== '') {
             let curr = lists[currentListId];
             let newTask = {
+                id: curr.todos.length + 100,
                 text: taskInput.value.trim(),
                 completed: false
             }
@@ -139,17 +209,48 @@ function deleteItem(index) {
     }
 }
 
-function editItem() {
-
-}
-
-
-
-
 function save() {
     localStorage.setItem('currentListId', JSON.stringify(currentListId)); 
     localStorage.setItem('lists', JSON.stringify(lists));
-   }
+}
+
+const keyStates = {};
+
+document.addEventListener('keydown', (event) => {
+    keyStates[event.key] = true;
+    checkKeys();
+})
+document.addEventListener('keyup', (event) => {
+    keyStates[event.key] = false;
+})
+
+function checkKeys() {
+    if (keyStates['z'] && keyStates['p'] && keyStates['g']) {
+        console.log('presssss');
+        var exList = [
+            {
+                id: 0,
+                name: 'Example',
+                todos: [
+                    {
+                        id: 100,
+                        text: 'test',
+                        completed: false
+                    },
+                    {
+                        id: 101,
+                        text: 'a wee bit of honey',
+                        completed: false
+                    }
+                ]
+            }
+        ];
+        localStorage.setItem('currentListId', JSON.stringify(0));
+        localStorage.setItem('lists', JSON.stringify(exList));
+        lists = exList;
+        render();
+    }
+}
 
 function load() {
     const storedCurrentListId = localStorage.getItem('currentListId');

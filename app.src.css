@@ -57,7 +57,7 @@
   .selected .trash {
     display: inline;
 }
-#editTodo{
+.editTodo{
     font-size: 10px;
     float: right;
 }
@@ -72,4 +72,10 @@
     height: 10px;
     display: flex; 
     padding: 15px 30px 15px 5px;
+}
+.hide {
+    display: none;
+}
+.delete {
+    font-size: medium;
 }
