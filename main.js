@@ -68,9 +68,9 @@ function showCurrentList(list, index) {
 showCurrentList(lists, currentListId);
 
 function render() {
-    let listsHtml = '<ul class="list-group">';
+    let listsHtml = '<ul class="list-group" id="sort">';
     lists.forEach((list) => {
-        listsHtml += `<li class="list-group-item"><button id="${list.id}" class="list w-full bg-gray-300 h-14  flex justify-around items-center "><span class="trash"><button class="up"><i class="fa-solid fa-arrow-up fa-xs"></i></button> <button class="down"><i class="fa-solid fa-arrow-down fa-xs"></i></button></span>${list.name}<button id="${list.id}" class="trash"><i class="fa-solid fa-trash fa-xs"></i></button><span class="tresh"></span></button></li>`;
+        listsHtml += `<li class="list-group-item" draggable="true"><button id="${list.id}" class="list w-full bg-gray-300 h-14  flex justify-around items-center "><span class="trash"></span>${list.name}<button id="${list.id}" class="trash"><i class="fa-solid fa-trash fa-xs"></i></button><span class="tresh"></span></button></li>`;
     });
     listsHtml += '</ul>';
     document.getElementById('mainLists').innerHTML = listsHtml;
@@ -163,6 +163,31 @@ function editItem() {
 
 }
 
+const sort = document.getElementById("sort");
+let draggedItem = null;
+const listItems = document.querySelectorAll("li");
+
+listItems.forEach((item)=>{
+   item.addEventListener("dragstart", (event) =>{
+    draggedItem = item;
+    event.dataTransfer.setData("text/plain", item.id);
+   }); 
+});
+
+sort.addEventListener("dragover", (event) =>{
+    event.preventDefault();
+    const targetItem = event.target.closest("li")
+    if (targetItem && draggedItem !== targetItem){
+        const y = event.clientY - targetItem.getBoundingClientRect().top;
+        const insertBefore = y < targetItem.clientHeight / 2;
+
+        if (insertBefore) {
+            sort.insertBefore(draggedItem, targetItem);
+        } else {
+            sort.insertBefore(draggedItem, targetItem.nextSibling);
+        }
+    }
+});
 
 
 
