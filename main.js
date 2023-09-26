@@ -47,7 +47,7 @@ function render() {
 
     let todosHtml = '<ul class="list-group-flush">';
     currentList.todos.forEach((todo) => {
-        todosHtml += `<li class="current-list-todos" id="${todo.id}"><input type="checkbox" class="check">${todo.text} <button id="editTodo"><i class="fa-solid fa-pen-to-square"></i></button></li>`;
+        todosHtml += `<li class="current-list-todos" id="${todo.id}"><input type="checkbox" class="check">${todo.text} <button id="editTodo" onclick="editItem()"><i class="fa-solid fa-pen-to-square"></i></button> <input  class="edit hidden" type = "text"></li>`;
         console.log(todo.id);
     });
     todosHtml += '</ul>';
@@ -138,6 +138,14 @@ function deleteItem(index) {
         showCurrentList(lists, currentListId);
     }
 }
+
+function editItem() {
+
+}
+
+
+
+
 function save() {
     localStorage.setItem('currentListId', JSON.stringify(currentListId)); 
     localStorage.setItem('lists', JSON.stringify(lists));
