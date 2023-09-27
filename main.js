@@ -49,7 +49,7 @@ function render() {
     currentList.todos.forEach((todo) => {
         todosHtml += `<li class="current-list-todos" id="${todo.id}"><input type="checkbox" class="check"><span>${todo.text}</span><button class="editTodo"><i class="fa-solid fa-pen-to-square"></i></button> <input class="edit hide" type="text"><button class="delete hide">Delete</button></li>`;
         if (todo.id !== undefined) {
-           console.log(todo.id); 
+           //console.log(todo.id); 
         } else {
             console.log('you suck');
         }
@@ -210,40 +210,62 @@ function deleteItem(index) {
     }
 }
 
-function editItem() {
+function reorder(item, sibling) {
+    const movedId = parseInt(item.children[0].id);
+    const placeId = parseInt(sibling.children[0].id);
 
+    const movedItem = lists.find(item => item.id === movedId);
+    const placeItem = lists.find(item => item.id === placeId);
+
+    const movedIndex = lists.indexOf(movedItem);
+    const placeIndex = lists.indexOf(placeItem);
+
+    lists.splice(movedIndex, 1);
+
+    lists.splice(placeIndex, 0, movedItem);
+
+    for (let i = 0; i < lists.length; i++) {
+        lists[i].id = i;
+    }
+
+    save();
 }
 
-function DragnDrop (){
+function DragnDrop() {
     const sort = document.getElementById("sort");
     let draggedItem = null;
+
     const listItems = document.querySelectorAll("li");
 
-    listItems.forEach((item)=>{
-        item.addEventListener("dragstart", (event) =>{
+    listItems.forEach((item) => {
+        item.addEventListener("dragstart", (event) => {
         draggedItem = item;
         event.dataTransfer.setData("text/plain", item.id);
-        }); 
+        });
     });
 
-    sort.addEventListener("dragover", (event) =>{
+    sort.addEventListener("dragover", (event) => {
         event.preventDefault();
-        const targetItem = event.target.closest("li")
-        if (targetItem && draggedItem !== targetItem){
-            const y = event.clientY - targetItem.getBoundingClientRect().top;
-            const insertBefore = y < targetItem.clientHeight / 2;
+        const targetItem = event.target.closest("li");
 
-            if (insertBefore) {
-                sort.insertBefore(draggedItem, targetItem);
-            } else {
-                sort.insertBefore(draggedItem, targetItem.nextSibling);
-            }
+        if (targetItem && draggedItem !== targetItem) {
+        const y = event.clientY - targetItem.getBoundingClientRect().top;
+        const insertBefore = y < targetItem.clientHeight / 2;
+
+        if (insertBefore) {
+            sort.insertBefore(draggedItem, targetItem);
+        } else {
+            sort.insertBefore(draggedItem, targetItem.nextSibling);
+        }
         }
     });
-
+    sort.addEventListener("dragend", () => {
+        reorder(draggedItem, draggedItem.nextSibling);
+        draggedItem = null;
+    });
 }
-    DragnDrop();
 
+DragnDrop();
 
 function save() {
     localStorage.setItem('currentListId', JSON.stringify(currentListId)); 
@@ -284,7 +306,8 @@ function checkKeys() {
         localStorage.setItem('currentListId', JSON.stringify(0));
         localStorage.setItem('lists', JSON.stringify(exList));
         lists = exList;
-        render();
+        currentListId = 0;
+        showCurrentList(lists, currentListId);
     }
 }
 
