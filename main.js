@@ -63,11 +63,12 @@ function render() {
     addDelete();
     editTodo();
     DragnDrop();
+    complete();
     save();
 }
 
 render();
-
+//Makes it so you can switch between different lists
 function addButtons() {
     b = document.querySelectorAll('button.list');
     b.forEach(function(b) {
@@ -82,7 +83,7 @@ function addButtons() {
         })
     });
 }
-
+//toggles the edit "menu" of the todo
 function addEdit() {
     e = document.querySelectorAll('button.editTodo');
     e.forEach(function(e) {
@@ -94,7 +95,7 @@ function addEdit() {
         })
     })
 }
-
+//Mkes it so you can edit your todos
 function editTodo() {
     e = document.querySelectorAll('button.editTodo');
     e.forEach(function(e) {
@@ -150,12 +151,11 @@ function editTodo() {
 function complete() {
     tasks = document.querySelectorAll('check');
     tasks.forEach(function(tasks) {
-        tasks.addEventListener('click', function() {
-
-        })
-    })
-}
-
+        task.addEventListener('check', function() {
+            
+        });
+    });
+};
 input.addEventListener('keyup', function(event) {
     if (event.key === 'Enter') {
         if (input.value.trim() !== '') {
@@ -186,7 +186,7 @@ taskInput.addEventListener('keyup', function(event) {
         }
     }
 })
-
+//makes the trash can icon a delete button
 function addDelete() {
     t = document.querySelectorAll('button.trash');
     t.forEach(function(t) {
@@ -196,7 +196,7 @@ function addDelete() {
         })
     })
 }
-
+//You can now delete lists
 function deleteItem(index) {
     if (index >= 0 && index < lists.length) {
         lists.splice(index, 1);
@@ -210,10 +210,8 @@ function deleteItem(index) {
     }
 }
 
-function editItem() {
 
-}
-
+//adds the drag and drop functionality
 function DragnDrop (){
     const sort = document.getElementById("sort");
     let draggedItem = null;
@@ -246,10 +244,11 @@ function DragnDrop (){
 
 
 function save() {
+    
     localStorage.setItem('currentListId', JSON.stringify(currentListId)); 
     localStorage.setItem('lists', JSON.stringify(lists));
 }
-
+console.log(save);
 const keyStates = {};
 
 document.addEventListener('keydown', (event) => {
