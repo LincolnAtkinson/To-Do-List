@@ -75,7 +75,18 @@
 }
 .hide {
     display: none;
+    
 }
 .delete {
-    font-size: medium;
+    padding: 0px 5px;
+    font-size: 40%;
+    border: solid black;
+    border-radius: 5px;
+}
+.edit{
+    
+    width: 25%;
+    height: 25%;
+    font-size: 45%;
+    margin: 5%;
 }
