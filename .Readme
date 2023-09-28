@@ -2,5 +2,7 @@ This is a To-Do list where you can create multiple lists. You can edit each list
 and delete them as well. To reorganize your lists all you have to do is drag and drop your
 items in the order that you want them to be. It is very simple to use and if you want to reset
 your storage all you have to do is press the keys z,p, and g, all at once. The app has local storage
-so your work is always saved. 
+so your work is always saved.
+In each list you can add as many todo items as you want. You can edit your todos and clear
+all your completed ones.
 That is all you really have to know to get started.
