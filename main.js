@@ -206,14 +206,16 @@ taskInput.addEventListener('keyup', function(event) {
 //Lets you clear all completed tasks
 clear.addEventListener('click', function() {
     var currL = lists[currentListId];
-    for (let i = 0; i < currL.todos.length; i++) {
+    for (let i = currL.todos.length - 1; i >= 0; i--) {
         if (currL.todos[i].completed === true) {
-            currentList.todos.splice(i, 1);
+            currL.todos.splice(i, 1);
         }
     }
     for (let i = 0; i < currL.todos.length; i++) {
         currL.todos[i].id = 100 + i;
     }
+    save();
+    render();
 })
 
 //makes the trash can icon a delete button
