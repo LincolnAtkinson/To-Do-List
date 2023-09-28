@@ -39,7 +39,7 @@ showCurrentList(lists, currentListId);
 function render() {
     let listsHtml = '<ul class="list-group" id="sort">';
     lists.forEach((list) => {
-        listsHtml += `<li class="list-group-item" draggable="true"><button id="${list.id}" class="list w-full bg-gray-300 h-14  flex justify-around items-center "><span class="trash"></span>${list.name}<button id="${list.id}" class="trash"><i class="fa-solid fa-trash fa-xs"></i></button><span class="tresh"></span></button></li>`;
+        listsHtml += `<li class="list-group-item" draggable="true"><button id="${list.id}" class="list w-full bg-gray-300 h-14 flex justify-around items-center "><span class="trash"></span>${list.name}<button id="${list.id}" class="trash"><i class="fa-solid fa-trash fa-xs"></i></button><span class="tresh"></span></button></li>`;
     });
     listsHtml += '</ul>';
     document.getElementById('mainLists').innerHTML = listsHtml;
@@ -47,11 +47,14 @@ function render() {
 
     let todosHtml = '<ul class="list-group-flush">';
     currentList.todos.forEach((todo) => {
-        todosHtml += `<li class="current-list-todos" id="${todo.id}"><input type="checkbox" class="check"><span>${todo.text}</span><button class="editTodo"><i class="fa-solid fa-pen-to-square"></i></button> <input class="edit hide" type="text"><button class="delete hide">Delete</button></li>`;
+        if (todo.completed === true) {
+            todosHtml += `<li class="current-list-todos green" id="${todo.id}"><input type="checkbox" class="check"><span>${todo.text}</span><button class="editTodo"><i class="fa-solid fa-pen-to-square"></i></button> <input class="edit hide" type="text"><button class="delete hide">Delete</button></li>`;
+        }
+        else if (todo.completed === false) {
+            todosHtml += `<li class="current-list-todos" id="${todo.id}"><input type="checkbox" class="check"><span>${todo.text}</span><button class="editTodo"><i class="fa-solid fa-pen-to-square"></i></button> <input class="edit hide" type="text"><button class="delete hide">Delete</button></li>`;
+        }
         if (todo.id !== undefined) {
-           //console.log(todo.id); 
-        } else {
-            console.log('you suck');
+           console.log(todo.id); 
         }
     });
     todosHtml += '</ul>';
@@ -147,15 +150,22 @@ function editTodo() {
     })
 }
 
-
 function complete() {
     tasks = document.querySelectorAll('check');
     tasks.forEach(function(tasks) {
-        task.addEventListener('check', function() {
-            
+        tasks.addEventListener('check', function() {
+            var li = tasks.closest('li');
+            var ed = li.id;
+            if (lists[currentListId].todos[ed].completed = true) {
+                lists[currentListId].todos[ed].completed = false;
+            }
+            else if (lists[currentListId].todos[ed].completed = false) {
+                lists[currentListId].todos[ed].completed = true;
+            }
         });
     });
 };
+
 input.addEventListener('keyup', function(event) {
     if (event.key === 'Enter') {
         if (input.value.trim() !== '') {
@@ -272,7 +282,7 @@ function save() {
     localStorage.setItem('currentListId', JSON.stringify(currentListId)); 
     localStorage.setItem('lists', JSON.stringify(lists));
 }
-console.log(save);
+
 const keyStates = {};
 
 document.addEventListener('keydown', (event) => {
