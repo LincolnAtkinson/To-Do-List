@@ -708,7 +708,6 @@ video {
 
 .current-list-todos{
   font-size: large;
-  border: solid red;
   margin: 1%;
   padding: 5px;
   width: 50%;
@@ -783,4 +782,16 @@ video {
   height: 25%;
   font-size: 45%;
   margin: 5%;
+}
+
+.green {
+  border: solid green;
+}
+
+.red {
+  border: solid red;
+}
+
+.comp {
+  float: right;
 }
