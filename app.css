@@ -542,6 +542,10 @@ video {
   left: 100%;
 }
 
+.float-right {
+  float: right;
+}
+
 .my-10 {
   margin-top: 2.5rem;
   margin-bottom: 2.5rem;
@@ -639,8 +643,16 @@ video {
   border-width: 2px;
 }
 
+.border {
+  border-width: 1px;
+}
+
 .border-b-2 {
   border-bottom-width: 2px;
+}
+
+.border-solid {
+  border-style: solid;
 }
 
 .border-black {
@@ -661,6 +673,11 @@ video {
 .bg-gray-300 {
   --tw-bg-opacity: 1;
   background-color: rgb(209 213 219 / var(--tw-bg-opacity));
+}
+
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
 .bg-cover {
@@ -802,4 +819,10 @@ video {
 
 .comp {
   float: right;
+}
+
+#clear{
+  font-size: 1vw;
+  padding: 1%;
+  margin: 3%;
 }

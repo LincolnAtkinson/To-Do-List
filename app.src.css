@@ -98,3 +98,8 @@
 .comp {
     float: right;
 }
+#clear{
+    font-size: 1vw;
+    padding: 1%;
+    margin: 3%;
+}
