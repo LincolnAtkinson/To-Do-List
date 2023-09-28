@@ -19,6 +19,7 @@ let lists = [
 
 var input = document.getElementById('userInput');
 var taskInput = document.getElementById('enter');
+var clear = document.getElementById('clear');
 let currentListId = 0;
 const currentList = {};
 var sel;
@@ -154,7 +155,6 @@ function complete() {
             const deleteButtons = document.querySelectorAll('button.comp');
             deleteButtons.forEach(function (deleteButtons) {
                 deleteButtons.addEventListener('click', function () {
-                    console.log('clicked del');
                     var todoId = li.id;
                     var currentList = lists[currentListId];
                     var todoToDeleteIndex = currentList.todos.findIndex(todo => todo.id == todoId);
@@ -202,6 +202,22 @@ taskInput.addEventListener('keyup', function(event) {
         }
     }
 })
+
+//Lets you clear all completed tasks
+clear.addEventListener('click', function() {
+    var currL = lists[currentListId];
+    for (let i = currL.todos.length - 1; i >= 0; i--) {
+        if (currL.todos[i].completed === true) {
+            currL.todos.splice(i, 1);
+        }
+    }
+    for (let i = 0; i < currL.todos.length; i++) {
+        currL.todos[i].id = 100 + i;
+    }
+    save();
+    render();
+})
+
 //makes the trash can icon a delete button
 function addDelete() {
     t = document.querySelectorAll('button.trash');
