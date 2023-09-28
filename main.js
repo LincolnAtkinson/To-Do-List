@@ -49,7 +49,7 @@ function render() {
     let todosHtml = '<ul class="list-group-flush">';
     currentList.todos.forEach((todo) => {
         if (todo.completed === true) {
-            todosHtml += `<li class="current-list-todos green" id="${todo.id}"><input type="checkbox" class="check" checked><span>${todo.text}</span><button class="editTodo"></button> <input class="edit hide" type="text"><button class="delete comp">Delete</button></li>`;
+            todosHtml += `<li class="current-list-todos green" id="${todo.id}"><input type="checkbox" class="check" checked><span>${todo.text}</span></li>`;
         }
         else if (todo.completed === false) {
             todosHtml += `<li class="current-list-todos red" id="${todo.id}"><input type="checkbox" class="check"><span>${todo.text}</span><button class="editTodo"><i class="fa-solid fa-pen-to-square"></i></button> <input class="edit hide" type="text"><button class="delete hide">Delete</button></li>`;
@@ -151,23 +151,6 @@ function complete() {
             }
             save();
             render();
-
-            const deleteButtons = document.querySelectorAll('button.comp');
-            deleteButtons.forEach(function (deleteButtons) {
-                deleteButtons.addEventListener('click', function () {
-                    var todoId = li.id;
-                    var currentList = lists[currentListId];
-                    var todoToDeleteIndex = currentList.todos.findIndex(todo => todo.id == todoId);
-                    if (todoToDeleteIndex !== -1) {
-                        currentList.todos.splice(todoToDeleteIndex, 1);
-                        for (let i = 0; i < currentList.todos.length; i++) {
-                            currentList.todos[i].id = 100 + i;
-                        }
-                        save();
-                        render();
-                    }
-                })
-            })
         });
     });
 };
