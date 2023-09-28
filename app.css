@@ -716,8 +716,6 @@ video {
 
 .current-list-todos{
   font-size: large;
-  border: solid pink;
-  background-color: white;
   margin: 1%;
   padding: 5px;
   width: 50%;
@@ -794,6 +792,14 @@ video {
   margin: 5%;
 }
 
-.green{
-  border: solid green;
+.green {
+  border: solid #4ca891;
+}
+
+.red {
+  border: solid pink;
+}
+
+.comp {
+  float: right;
 }

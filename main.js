@@ -39,7 +39,7 @@ showCurrentList(lists, currentListId);
 function render() {
     let listsHtml = '<ul class="list-group" id="sort">';
     lists.forEach((list) => {
-        listsHtml += `<li class="list-group-item" draggable="true"><button id="${list.id}" class="list w-full bg-gray-300 h-14  flex justify-around items-center "><span class="trash"></span>${list.name}<button id="${list.id}" class="trash"><i class="fa-solid fa-trash fa-xs"></i></button><span class="tresh"></span></button></li>`;
+        listsHtml += `<li class="list-group-item" draggable="true"><button id="${list.id}" class="list w-full bg-gray-300 h-14 flex justify-around items-center "><span class="trash"></span>${list.name}<button id="${list.id}" class="trash"><i class="fa-solid fa-trash fa-xs"></i></button><span class="tresh"></span></button></li>`;
     });
     listsHtml += '</ul>';
     document.getElementById('mainLists').innerHTML = listsHtml;
@@ -47,11 +47,11 @@ function render() {
 
     let todosHtml = '<ul class="list-group-flush">';
     currentList.todos.forEach((todo) => {
-        todosHtml += `<li class="current-list-todos" id="${todo.id}" ><input type="checkbox" class="check"><span>${todo.text}</span><button class="editTodo"><i class="fa-solid fa-pen-to-square"></i></button> <input class="edit hide" type="text"><button class="delete hide">Delete</button></li>`;
-        if (todo.id !== undefined) {
-           //console.log(todo.id); 
-        } else {
-            console.log('you suck');
+        if (todo.completed === true) {
+            todosHtml += `<li class="current-list-todos green" id="${todo.id}"><input type="checkbox" class="check" checked><span>${todo.text}</span><button class="editTodo"></button> <input class="edit hide" type="text"><button class="delete comp">Delete</button></li>`;
+        }
+        else if (todo.completed === false) {
+            todosHtml += `<li class="current-list-todos red" id="${todo.id}"><input type="checkbox" class="check"><span>${todo.text}</span><button class="editTodo"><i class="fa-solid fa-pen-to-square"></i></button> <input class="edit hide" type="text"><button class="delete hide">Delete</button></li>`;
         }
     });
     todosHtml += '</ul>';
@@ -83,19 +83,8 @@ function addButtons() {
         })
     });
 }
-//toggles the edit "menu" of the todo
-function addEdit() {
-    e = document.querySelectorAll('button.editTodo');
-    e.forEach(function(e) {
-        e.addEventListener('click', function () {
-            var close = e.closest('li').querySelector('input.edit');
-            var del = e.closest('li').querySelector('button.delete');
-            close.classList.toggle('hide');
-            del.classList.toggle('hide');
-        })
-    })
-}
-//Mkes it so you can edit your todos
+
+//Makes it so you can edit your todos
 function editTodo() {
     e = document.querySelectorAll('button.editTodo');
     e.forEach(function(e) {
@@ -147,15 +136,42 @@ function editTodo() {
     })
 }
 
-
 function complete() {
-    tasks = document.querySelectorAll('check');
+    const tasks = document.querySelectorAll('input.check');
     tasks.forEach(function(tasks) {
-        task.addEventListener('check', function() {
-            
+        tasks.addEventListener('click', function() {
+            const li = tasks.closest('li');
+            const ed = (li.id - 100);
+            if (lists[currentListId].todos[ed].completed === true) {
+                lists[currentListId].todos[ed].completed = false;
+            }
+            else if (lists[currentListId].todos[ed].completed === false) {
+                lists[currentListId].todos[ed].completed = true;
+            }
+            save();
+            render();
+
+            const deleteButtons = document.querySelectorAll('button.comp');
+            deleteButtons.forEach(function (deleteButtons) {
+                deleteButtons.addEventListener('click', function () {
+                    console.log('clicked del');
+                    var todoId = li.id;
+                    var currentList = lists[currentListId];
+                    var todoToDeleteIndex = currentList.todos.findIndex(todo => todo.id == todoId);
+                    if (todoToDeleteIndex !== -1) {
+                        currentList.todos.splice(todoToDeleteIndex, 1);
+                        for (let i = 0; i < currentList.todos.length; i++) {
+                            currentList.todos[i].id = 100 + i;
+                        }
+                        save();
+                        render();
+                    }
+                })
+            })
         });
     });
 };
+
 input.addEventListener('keyup', function(event) {
     if (event.key === 'Enter') {
         if (input.value.trim() !== '') {
@@ -272,7 +288,7 @@ function save() {
     localStorage.setItem('currentListId', JSON.stringify(currentListId)); 
     localStorage.setItem('lists', JSON.stringify(lists));
 }
-console.log(save);
+
 const keyStates = {};
 
 document.addEventListener('keydown', (event) => {
@@ -283,6 +299,7 @@ document.addEventListener('keyup', (event) => {
     keyStates[event.key] = false;
 })
 
+//Lets you reset your local save
 function checkKeys() {
     if (keyStates['z'] && keyStates['p'] && keyStates['g']) {
         console.log('presssss');
