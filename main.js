@@ -47,7 +47,7 @@ function render() {
 
     let todosHtml = '<ul class="list-group-flush">';
     currentList.todos.forEach((todo) => {
-        todosHtml += `<li class="current-list-todos" id="${todo.id}"><input type="checkbox" class="check"><span>${todo.text}</span><button class="editTodo"><i class="fa-solid fa-pen-to-square"></i></button> <input class="edit hide" type="text"><button class="delete hide">Delete</button></li>`;
+        todosHtml += `<li class="current-list-todos" id="${todo.id}" ><input type="checkbox" class="check"><span>${todo.text}</span><button class="editTodo"><i class="fa-solid fa-pen-to-square"></i></button> <input class="edit hide" type="text"><button class="delete hide">Delete</button></li>`;
         if (todo.id !== undefined) {
            //console.log(todo.id); 
         } else {
