@@ -676,10 +676,6 @@ video {
   background-size: cover;
 }
 
-.bg-no-repeat {
-  background-repeat: no-repeat;
-}
-
 .px-10 {
   padding-left: 2.5rem;
   padding-right: 2.5rem;
@@ -724,11 +720,17 @@ video {
 }
 
 .current-list-todos{
-  font-size: large;
   margin: 1%;
   padding: 5px;
   width: 50%;
   font-size: 3vw;
+}
+
+.current-list-todos:hover{
+  margin: 1.2%;
+  padding: 5.2px;
+  width: 52%;
+  font-size: 3.2vw;
 }
 
 .check{
