@@ -9,25 +9,26 @@
         <script src="https://kit.fontawesome.com/0d1d579ea0.js" crossorigin="anonymous"></script>
     </head>
     <body class="flex flex-row h-screen  max-h-screen">
-
         <section class="bg-gray-200 w-3/12 h-screen border-r-gray-300 border-2 flex items-center flex-col overflow-y-auto max-h-screen">
             <input type="text" id="userInput" placeholder="Create New List..." class="w-4/5 h-16 text-lg outline-none pl-5 my-10"></input>
             <div id="mainLists" class="w-full h-fit">
                 <ul class="list-group">
+                    <!--Write new lists here-->
                     <li class="list-group-item"><button class="list w-full bg-gray-300 h-14 text-2xl flex justify-center items-center px-10"><span class="relative"></span><button class="trash relative left-full"><i class="fa-solid fa-trash"></i></button></button></li>
                 </ul>
             </div>
         </section>
-
         <main class="w-full  bg-cover overflow-y-auto max-h-screen" style="background-image: url(images/composition-beautiful-pink-flowers-plants.jpg);">
             <section id="current-list-name" class="w-fit h-fit border-b-2 border-black ml-16 mt-10"></section>
             <section id="current-list-todos">
                 <ul class="list-group-flush">
+                    <!--Write new tasks here-->
                     <li class="current-list-todos green"><input type="checkbox" class="check" value="checked"><span>${todo.text}</span><button class="editTodo"><i class="fa-solid fa-pen-to-square"></i></button> <input class="edit hide" type="text"><button class="delete hide">Delete</button></li>
                 </ul>
             </section>
             <section class="bg-gray-300 rounded-b-lg" id="bottombox">
                 <div class="todo">
+                    <!--Bottom bar across all lists-->
                   <input id="enter" type="text" placeholder="Add a task to do." class="my-3 rounded-lg w-1/4">
                   <button id="clear" class="bg-white my-3 rounded-lg w-1/4 float-right border-2 border-black">Clear Completed</button>
                 </div>
