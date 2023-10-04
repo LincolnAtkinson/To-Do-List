@@ -71,13 +71,13 @@ function render() {
 render();
 //Makes it so you can switch between different lists
 function addButtons() {
-    b = document.querySelectorAll('button.list');
-    b.forEach(function(b) {
-        b.addEventListener('click', function() {
-            currentListId = b.id;
+    let buttons = document.querySelectorAll('button.list');
+    buttons.forEach(function(buttons) {
+        buttons.addEventListener('click', function() {
+            currentListId = buttons.id;
             sel.classList.add('list');
             sel.classList.remove('selected');
-            sel = b;
+            sel = buttons;
             sel.classList.add('selected');
             sel.classList.remove('list');
             showCurrentList(lists, currentListId);
@@ -87,10 +87,10 @@ function addButtons() {
 
 //Makes it so you can edit your todos
 function editTodo() {
-    e = document.querySelectorAll('button.editTodo');
-    e.forEach(function(e) {
-        e.addEventListener('click', function() {
-            var listItem = e.closest('li');
+    let edits = document.querySelectorAll('button.editTodo');
+    edits.forEach(function(edits) {
+        edits.addEventListener('click', function() {
+            var listItem = edits.closest('li');
             var editInput = listItem.querySelector('input.edit');
             var del = listItem.querySelector('button.delete');
             var todoText = listItem.querySelector('span');
@@ -107,7 +107,6 @@ function editTodo() {
                     del.classList.toggle('hide');
                     
                     var todoId = listItem.id;
-                    console.log(listItem.id);
                     var currentList = lists[currentListId];
                     var todoToUpdate = currentList.todos.find(todo => todo.id == todoId);
                     if (todoToUpdate) {
@@ -203,10 +202,10 @@ clear.addEventListener('click', function() {
 
 //makes the trash can icon a delete button
 function addDelete() {
-    t = document.querySelectorAll('button.trash');
-    t.forEach(function(t) {
-        t.addEventListener('click', function() {
-            deleteItem(t.id);
+    let trashes = document.querySelectorAll('button.trash');
+    trashes.forEach(function(trashes) {
+        trashes.addEventListener('click', function() {
+            deleteItem(trashes.id);
             render();
         })
     })
@@ -301,7 +300,6 @@ document.addEventListener('keyup', (event) => {
 //Lets you reset your local save
 function checkKeys() {
     if (keyStates['z'] && keyStates['p'] && keyStates['g']) {
-        console.log('presssss');
         var exList = [
             {
                 id: 0,
